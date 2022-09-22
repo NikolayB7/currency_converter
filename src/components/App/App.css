@@ -1,0 +1,25 @@
+html,body,#root{
+    height: 100%;
+}
+body{
+    color:#D3D0CB;
+    background: #393E41;
+}
+
+.app{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.app__wrapper{
+    width: 50vw;
+    height: 50vh;
+}
+
+.test{
+    color:#44BBA4;
+    color:#E7E5DF;
+    color:#D3D0CB;
+    color:#393E41;
+}
