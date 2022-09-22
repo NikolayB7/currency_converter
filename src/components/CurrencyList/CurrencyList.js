@@ -1,6 +1,7 @@
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button';
 import {useState,useEffect} from "react";
+import data from "bootstrap/js/src/dom/data";
 
 const TableBlock =(props)=>{
     const [listCurrency,setListCurrency] = useState([])
@@ -20,7 +21,7 @@ const TableBlock =(props)=>{
                             <td>{item.cc}</td>
                             <td>val-calc</td>
                             <td className="text-center">
-                                <Button variant="outline-light">Remove</Button>
+                                <Button variant="outline-light" onClick={()=> props.removeItem(item.cc)}>Remove</Button>
                             </td>
                         </tr>
                     )
@@ -34,7 +35,7 @@ const TableBlock =(props)=>{
 const CurrencyList =(props)=>{
     return(
         <>
-            { (props.visibleList.length) ? <TableBlock data={props.visibleList}/>: 'Загрузка...'}
+            { (props.visibleList.length) ? <TableBlock removeItem={props.removeItem} data={props.visibleList}/>: null}
         </>
     )
 }
