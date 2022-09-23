@@ -10,12 +10,18 @@ class App extends Component{
         super(props);
         this.state = {
             selectable :{},
-            list:[]
+            list:[],
+            value:0
         }
     }
 
     selectedCurrency=(val)=>{
         this.setState({selectable:val})
+    }
+
+    changeValue=(val)=>{
+        console.log(val,'val')
+        this.setState({value:val})
     }
 
     removeItem=(val)=>{
@@ -30,16 +36,18 @@ class App extends Component{
     }
 
     render() {
-        const {selectable,list} = this.state
+        const {selectable,list,value} = this.state
         return (
             <div className="app">
                 <div className="app__wrapper">
                     <CurrencyChoise selectedCurrency={this.selectedCurrency}/>
-                    <CurrencyField/>
-                    <CurrencyList visibleList={list} removeItem={this.removeItem}/>
-                    { (list.length)?
-                        <Button onClick={()=> this.setState({list:[]})} variant="primary">Clear all</Button>:
-                        null
+                    { (list.length)?<CurrencyField changeValue={this.changeValue}/>:null}
+
+                    {
+                        (list.length)? <CurrencyList visibleList={list} value={value} removeItem={this.removeItem}/> :null
+                    }
+                    {
+                        (list.length)?<Button onClick={()=> this.setState({list:[]})} variant="primary">Clear all</Button>: null
                     }
 
                 </div>

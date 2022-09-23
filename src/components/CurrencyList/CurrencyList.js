@@ -1,7 +1,7 @@
 import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button';
+import CloseButton from 'react-bootstrap/CloseButton';
 import {useState,useEffect} from "react";
-import data from "bootstrap/js/src/dom/data";
+
 
 const TableBlock =(props)=>{
     const [listCurrency,setListCurrency] = useState([])
@@ -11,6 +11,15 @@ const TableBlock =(props)=>{
     },)
     return(
         <Table striped bordered size="sm" variant="dark">
+            <thead>
+            <tr>
+                <td className="text-center">Назва</td>
+                <td className="text-center">Вартiсть за 1 (в грн)</td>
+                <td className="text-center">Код</td>
+                <td className="text-center">Вартiсть за {props.value} одиниць</td>
+                <td className="text-center"></td>
+            </tr>
+            </thead>
             <tbody>
             {
                 listCurrency.map(item=>{
@@ -19,9 +28,9 @@ const TableBlock =(props)=>{
                             <td>{item.txt}</td>
                             <td>{item.rate}</td>
                             <td>{item.cc}</td>
-                            <td>val-calc</td>
+                            <td>{(props.value * item.rate).toFixed(2)} грн</td>
                             <td className="text-center">
-                                <Button variant="outline-light" onClick={()=> props.removeItem(item.cc)}>Remove</Button>
+                                <CloseButton variant="white" onClick={()=> props.removeItem(item.cc)}/>
                             </td>
                         </tr>
                     )
@@ -35,7 +44,7 @@ const TableBlock =(props)=>{
 const CurrencyList =(props)=>{
     return(
         <>
-            { (props.visibleList.length) ? <TableBlock removeItem={props.removeItem} data={props.visibleList}/>: null}
+            { (props.visibleList.length) ? <TableBlock removeItem={props.removeItem} value={props.value} data={props.visibleList}/>: null}
         </>
     )
 }
